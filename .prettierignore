@@ -1,0 +1,12 @@
+node_modules
+dist
+.astro
+test-results
+content
+static
+package-lock.json
+.pages.yml
+
+build
+.gitblog/work
+discovery-audit-*.json

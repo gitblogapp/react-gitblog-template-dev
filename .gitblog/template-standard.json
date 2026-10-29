@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "standardVersion": "0.1.0",
+  "sourceTemplate": "gitblogapp/svelte-gitblog-template",
+  "sourceCommit": "8e341bac3096731e14891a867bb16ab20ba70fd6",
+  "framework": "react",
+  "adaptations": [
+    "React static HTML renderer with Vite browser bundle",
+    "Shared core, CLI and browser packages; no framework-specific logic fork",
+    "GitBook-inspired theme and protected React extension slots",
+    "GitHub/Cloudflare Pages deployment with source-base URL handling",
+    "Public-only DTO boundary, membership embeds, verified repository audio",
+    "Platform TTS remains in gitblogapp/gitblog-tts; official registration remains gated"
+  ],
+  "sourceVersion": "1.14.4",
+  "packages": {
+    "version": "0.1.1",
+    "repository": "gitblogapp/gitblog-template-packages"
+  }
+}
