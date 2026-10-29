@@ -93,7 +93,12 @@ await json("site.webmanifest", {
     },
   ],
 });
-for (const file of await fs.readdir("src/pages")) {
+// Custom pages are optional; Git does not preserve an empty directory.
+const customPages = await fs.readdir("src/pages").catch((error) => {
+  if (error.code === "ENOENT") return [];
+  throw error;
+});
+for (const file of customPages) {
   if (!/^[a-z0-9][a-z0-9-]*\.tsx$/.test(file)) continue;
   const route = file.replace(/\.tsx$/, "");
   if (["blog", "search", "index", ...config.locales].includes(route))
