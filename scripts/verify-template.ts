@@ -18,6 +18,7 @@ import {
 const temp = templateFixture();
 const seoOnly = process.argv.includes("--seo");
 try {
+  fs.mkdirSync(path.join(temp, "src/pages"), { recursive: true });
   fs.writeFileSync(
     path.join(temp, "src/pages/custom.tsx"),
     "export default function Custom(){return <h1>USER_PAGE_SENTINEL</h1>}",
