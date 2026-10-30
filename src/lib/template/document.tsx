@@ -83,7 +83,12 @@ export function renderPage(
       <meta property="og:type" content={post ? "article" : "website"} />
       <meta property="og:site_name" content={site.title} />
       <meta property="og:locale" content={site.language.replace("-", "_")} />
-      {image && <meta property="og:image" content={image} />}
+      {image && (
+        <>
+          <meta property="og:image" content={image} />
+          <meta property="og:image:alt" content={post?.title ?? site.title} />
+        </>
+      )}
       {post && (
         <>
           <meta
@@ -97,6 +102,14 @@ export function renderPage(
         name="twitter:card"
         content={image ? "summary_large_image" : "summary"}
       />
+      <meta name="twitter:title" content={post?.title ?? site.title} />
+      <meta name="twitter:description" content={data.description} />
+      {image && (
+        <>
+          <meta name="twitter:image" content={image} />
+          <meta name="twitter:image:alt" content={post?.title ?? site.title} />
+        </>
+      )}
       {site.verification && (
         <meta name="google-site-verification" content={site.verification} />
       )}
