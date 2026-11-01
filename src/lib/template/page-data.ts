@@ -96,6 +96,7 @@ export function pageData(
           post: {
             ...summary(post),
             html: post.html,
+            seo: post.seo,
             toc: post.toc,
             giscusTerm: post.giscusTerm,
             membershipId: post.membershipId,

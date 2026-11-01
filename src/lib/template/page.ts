@@ -1,3 +1,4 @@
+import type { ArticleSeo } from "@gitblogapp/core/seo";
 import type { Site } from "./config";
 
 /** Only these public fields cross the build/browser boundary. Never serialize Config or Post. */
@@ -16,6 +17,7 @@ export interface ArticleSummary {
   access: "public" | "membership";
 }
 export interface Article extends ArticleSummary {
+  seo?: ArticleSeo;
   html: string;
   toc: { id: string; text: string; level: number }[];
   giscusTerm: string;

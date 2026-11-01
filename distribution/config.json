@@ -18,7 +18,8 @@
     "static",
     "content",
     "docs/gitblog",
-    "scripts"
+    "scripts",
+    "vendor/gitblog-packages"
   ],
   "metadata": [
     ".gitblog/authoring.json",

@@ -1,3 +1,4 @@
+import { articleSeoMarkdown } from '@gitblogapp/core/seo';
 import type { Blog, Post } from "./content";
 import { languageTag, localizedSite } from "./config";
 import { absolute, postPath } from "./urls";
@@ -62,7 +63,7 @@ export function publicMarkdown(blog: Blog, post: Post) {
   };
   return `---\n${Object.entries(metadata)
     .map(([key, value]) => `${key}: ${JSON.stringify(value)}`)
-    .join("\n")}\n---\n\n${post.body.trim()}\n`;
+    .join("\n")}\n---\n\n${articleSeoMarkdown(post.seo, post.body, post.locale).trim()}\n`;
 }
 const inline = (value: string) =>
   value.replace(/[\r\n]+/g, " ").replace(/[\\[\]<>]/g, (char) => `\\${char}`);

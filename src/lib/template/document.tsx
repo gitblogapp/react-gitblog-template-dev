@@ -1,3 +1,4 @@
+import { authorEntity, articleSeoSchema } from "@gitblogapp/core/seo";
 import { renderToStaticMarkup, renderToString } from "react-dom/server";
 import type { ReactNode } from "react";
 import { App } from "../../theme/App";
@@ -25,7 +26,8 @@ export function renderPage(
         description: data.description,
         datePublished: new Date(post.date).toISOString(),
         dateModified: post.lastModified,
-        author: { "@type": "Person", name: site.author },
+        ...articleSeoSchema(post.seo),
+        author: authorEntity(site.author, site.authorSiteUrl, site.authorUrl),
         mainEntityOfPage: data.canonical,
         url: data.canonical,
         inLanguage: site.language,

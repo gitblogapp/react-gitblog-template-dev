@@ -51,7 +51,7 @@ export function ArticleView({ data, post }: { data: PageData; post: Article }) {
           </p>
           <div className="article-byline">
             <span className="avatar">{data.site.author.slice(0, 1)}</span>
-            <span>{data.site.author}</span>
+            {data.site.authorUrl ? <a href={data.site.authorUrl} rel="author">{data.site.author}</a> : <span>{data.site.author}</span>}
             <span className="meta-dot" />
             <time dateTime={post.date}>
               {dateText(post.date, data.site.language)}
