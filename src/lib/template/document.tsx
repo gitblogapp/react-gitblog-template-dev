@@ -27,7 +27,7 @@ export function renderPage(
         datePublished: new Date(post.date).toISOString(),
         dateModified: post.lastModified,
         ...articleSeoSchema(post.seo),
-        author: authorEntity(site.author, site.authorSiteUrl, site.authorUrl),
+        author: { ...authorEntity(site.author, site.authorSiteUrl, site.authorUrl), '@type': site.authorType },
         mainEntityOfPage: data.canonical,
         url: data.canonical,
         inLanguage: site.language,
