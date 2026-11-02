@@ -1,7 +1,7 @@
 import { localizedSite, type Config } from "./config";
 import { type Blog, escapeHtml } from "./content";
 import { absolute, homePath, postPath, rssPath, searchPath } from "./urls";
-import { bodyExcerptXml } from "./body-excerpt";
+import { previewContentXml } from "./preview-content.js";
 export const xml = (value: string) =>
   escapeHtml(value).replaceAll("&#39;", "&apos;");
 const limitedUrl = (value: string) => {
@@ -47,7 +47,7 @@ export function rss(blog: Blog, locale: string) {
 ${config.buildCommit ? `<hub:buildCommit>${xml(config.buildCommit)}</hub:buildCommit>` : ""}
 <atom:link href="${xml(absolute(config, rssPath(config, locale)))}" rel="self" type="application/rss+xml" />
 ${latest ? `<lastBuildDate>${new Date(latest).toUTCString()}</lastBuildDate>` : ""}
-${posts.map((post) => `<item><title>${xml(post.title)}</title><link>${xml(limitedUrl(absolute(config, postPath(config, locale, post.slug))))}</link><guid isPermaLink="false">${xml(post.id)}</guid><description>${xml(post.description)}</description>${bodyExcerptXml(post.bodyExcerpt, bodyBudget)}<pubDate>${new Date(post.date).toUTCString()}</pubDate><hub:postId>${xml(post.id)}</hub:postId><hub:access>${post.access}</hub:access><hub:previewAllowed>${post.previewAllowed}</hub:previewAllowed><hub:locale>${xml(locale)}</hub:locale><hub:sourceLocale>${xml(config.sourceLocale)}</hub:sourceLocale><hub:giscusTerm>${post.giscusTerm}</hub:giscusTerm>${post.cover ? `<hub:cover>${xml(limitedUrl(absolute(config, post.cover)))}</hub:cover>` : ""}${post.updated ? `<hub:updated>${new Date(post.updated).toISOString()}</hub:updated>` : ""}${[post.category, ...post.tags].map((category) => `<category>${xml(category)}</category>`).join("")}${post.taxonomy ? `<hub:taxonomy>${xml(JSON.stringify({ version: 1, ...post.taxonomy }))}</hub:taxonomy>` : ""}</item>`).join("\n")}
+${posts.map((post) => `<item><title>${xml(post.title)}</title><link>${xml(limitedUrl(absolute(config, postPath(config, locale, post.slug))))}</link><guid isPermaLink="false">${xml(post.id)}</guid><description>${xml(post.description)}</description>${previewContentXml(post, bodyBudget)}<pubDate>${new Date(post.date).toUTCString()}</pubDate><hub:postId>${xml(post.id)}</hub:postId><hub:access>${post.access}</hub:access><hub:previewAllowed>${post.previewAllowed}</hub:previewAllowed><hub:locale>${xml(locale)}</hub:locale><hub:sourceLocale>${xml(config.sourceLocale)}</hub:sourceLocale><hub:giscusTerm>${post.giscusTerm}</hub:giscusTerm>${post.cover ? `<hub:cover>${xml(limitedUrl(absolute(config, post.cover)))}</hub:cover>` : ""}${post.updated ? `<hub:updated>${new Date(post.updated).toISOString()}</hub:updated>` : ""}${[post.category, ...post.tags].map((category) => `<category>${xml(category)}</category>`).join("")}${post.taxonomy ? `<hub:taxonomy>${xml(JSON.stringify({ version: 1, ...post.taxonomy }))}</hub:taxonomy>` : ""}</item>`).join("\n")}
 </channel></rss>`;
   const remaining = 2 * 1024 * 1024 - Buffer.byteLength(render());
   if (remaining < 0) throw new Error(`Hub v1: ${locale} feed exceeds 2 MiB`);
