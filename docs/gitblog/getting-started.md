@@ -74,7 +74,7 @@ scripts/                 Shared CLI adapters and deployment utilities
 docs/gitblog/            Official operating guides
 ```
 
-The shared packages `@gitblogapp/core`, `@gitblogapp/cli`, and `@gitblogapp/browser` are pinned to `0.1.1`. The compatibility baseline is recorded in `.gitblog/template-standard.json`.
+The shared packages `@gitblogapp/core`, `@gitblogapp/cli`, and `@gitblogapp/browser` are pinned to `0.2.1`. The compatibility baseline is recorded in `.gitblog/template-standard.json`.
 
 Customize `src/theme/` for design. Use `src/extensions/Slot.tsx` for `article-before-body`, `article-after-body`, and `site-footer` extensions. An optional `src/pages/about.tsx` default React component creates `/about/`. It is static HTML; interactive owner extensions belong in the hydrated Slot component. See [customization](../../docs/gitblog/customization.md).
 
