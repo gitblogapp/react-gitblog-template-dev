@@ -46,9 +46,11 @@ export function useAnalytics(config: PageData["integrations"]["analytics"]) {
 export function PostIntegrations({
   data,
   post,
+  placement = "all",
 }: {
   data: PageData;
   post: Article;
+  placement?: "body" | "after-comments" | "all";
 }) {
   const member = useRef<HTMLElement>(null),
     related = useRef<HTMLElement>(null);
@@ -76,10 +78,10 @@ export function PostIntegrations({
       related.current.replaceChildren(script);
     }
     return () => reader?.destroy();
-  }, [data.integrations, data.locale, post.id, post.membershipId]);
+  }, [data.integrations, data.locale, post.id, post.membershipId, placement]);
   return (
     <>
-      {post.access === "membership" && (
+      {placement !== "after-comments" && post.access === "membership" && (
         <section
           ref={member}
           className="membership-embed"
@@ -92,7 +94,7 @@ export function PostIntegrations({
           </noscript>
         </section>
       )}
-      {data.integrations.related && (
+      {placement !== "body" && data.integrations.related && (
         <section
           ref={related}
           className="related-panel"

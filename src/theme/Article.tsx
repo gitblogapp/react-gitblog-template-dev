@@ -115,7 +115,7 @@ export function ArticleView({ data, post }: { data: PageData; post: Article }) {
             )}
           </div>
         )}
-        <PostIntegrations data={data} post={post} />
+        <PostIntegrations data={data} post={post} placement="body" />
         <Slot name="article-after-body" {...context} />
         <div className="article-bottom" data-pagefind-ignore>
           <div className="tags">
@@ -142,6 +142,7 @@ export function ArticleView({ data, post }: { data: PageData; post: Article }) {
           </p>
         )}
         <Comments data={data} post={post} />
+        <PostIntegrations data={data} post={post} placement="after-comments" />
       </article>
       <nav className="article-pagination" aria-label={ui.journal}>
         {previous ? (
